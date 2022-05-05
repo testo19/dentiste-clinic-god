@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -8,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class UserRegisterComponent implements OnInit {
   RegisterForm = new FormGroup({
-    memberId: new FormControl('', Validators.required),
+    memberId: new FormControl('', Validators.required,),
     titleName: new FormControl('', Validators.required),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -16,16 +17,37 @@ export class UserRegisterComponent implements OnInit {
     phoneNumber: new FormControl('', Validators.required),
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
+    confirmPassword: new FormControl('', Validators.required),
+    gender: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     position: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     updateBy: new FormControl('', Validators.required),
   });
   public get RegisterFormControl(): any {
-    return this.RegisterForm.controls;
+    return this.RegisterForm.controls
   }
 
-  constructor() {}
+  constructor() {
+    
+  }
 
   ngOnInit(): void {}
+
+  onSubmit(){
+    console.log('submit');
+    console.log(this.RegisterForm.value);
+    
+  }
+
+  onClickTab(key:any){
+    console.log(key);
+    this.RegisterForm.reset()
+    this.RegisterForm.controls['memberId'].disable()
+  }
+
+  onInputGender(e:any){
+    console.log(e.target.value);
+    
+  }
 }
